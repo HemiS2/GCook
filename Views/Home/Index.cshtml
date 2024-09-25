@@ -1,49 +1,51 @@
-﻿@model GCook.ViewModels.HomeVM
-@{
-    ViewData["Title"] = "Home";
+﻿@{
+    ViewData["Title"] = "Área Administrativa";
+    Layout = "/Views/Shared/LayoutAdmin.cshtml";
 }
 
-<div class="pt-4 container">
-    <div class="d-flex flex-column text-center text-white ">
-        <h1 class="display-4">GCook</h1
-        <hr>
-        <h5>Escolha sua categoria</h5>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-2 mt-2">
-        @foreach (Categoria categoria in Model.Categorias)
-        {
-            <div class="col">
-                <div class="bg-light rounded-2">
-                    <img src="@categoria.Foto" class="w-100 rounded-top-2" alt="@categoria.Nome">
-                    <h3 class="display-4 fs-6 text-dark py-2">
-                        @categoria.Nome
-                    </h3>
-                </div>
-            </div>
-        }
-    </div>
-</div>
+<div class="jumbotron jumbotron-fluid pt-3">
+    <div class="container">
+        <h1 class="display-4">Área Administrativa</h1>
+        <p class="lead">Seja bem-vindo Administrador! Utilize o menu lateral ou os botões abaixo para ter
+        acesso aos diferentes cadastros do portal!</p>
+        <hr class="my-4">
 
-
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3 mt-4">
-        @foreach (Receita receita in Model.Receitas)
-        {
-            <!-- Card Receita - Inicio -->
-            <div class="col">
-                <a asp-action="Receita" asp-route-id="@receita.Id" class="text-decoration-none">
-                    <div class="card bg-dark border-white">
-                        <img src="@receita.Foto" class="card-img-top object-fit-cover" alt="@receita.Nome" height="260" />
+        <div class="row g-4">
+            <div class="col-md-4">
+                <a class="btn btn-dark p-0" asp-action="Index" asp-controller="Receitas">
+                    <div class="card bg-danger text-white">
+                        <img src="/img/categorias/1.jpg" class="w-100 rounded-top-2" alt="Receitas">
                         <div class="card-body">
-                            <h5 class="card-title text-white mb-3">@receita.Nome</h5>
-                            <div class="d-flex justify-content-between">
-                                <span class="text-white">@receita.Categoria.Nome</span>
-                                <span class="text-white">@receita.Ingredientes.Count() Ingredientes</span>
-                            </div>
+                            <h5 class="card-title">Receitas</h5>
+                            <p class="card-text">Cadastradas: 1</p>
                         </div>
                     </div>
                 </a>
             </div>
-            <!-- Card Receita - Fim -->
-        }
-    </div>
 
+            <div class="col-md-4">
+                <a class="btn btn-dark p-0" asp-action="Index" asp-controller="Ingredientes">
+                    <div class="card bg-danger text-white">
+                        <img src="/img/categorias/1.jpg" class="w-100 rounded-top-2" alt="Ingredientes">
+                        <div class="card-body">
+                            <h5 class="card-title">Ingredientes</h5>
+                            <p class="card-text">Cadastrados: 14</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4">
+                <a class="btn btn-dark p-0" asp-action="Index" asp-controller="Categorias">
+                    <div class="card bg-danger text-white">
+                        <img src="/img/categorias/1.jpg" class="w-100 rounded-top-2" alt="Categorias">
+                        <div class="card-body">
+                            <h5 class="card-title">Categorias</h5>
+                            <p class="card-text">Cadastradas: 12</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
