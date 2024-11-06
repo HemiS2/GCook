@@ -1,14 +1,14 @@
 using System.Security.Claims;
-using System.Text;
-using System.Text.Encodings.Web;
+using Microsoft.AspNetCore.Identity;
 using GCook.Data;
+using GCook.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using GCook.Helpers;
 using GCook.Models;
-using GCook.ViewModels;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.WebEncoders;
+using System.Text;
+using System.Text.Encodings.Web;
+
 
 namespace GCook.Services;
 
@@ -122,17 +122,16 @@ public class UsuarioService : IUsuarioService
 
         if (result.Succeeded)
         {
-            _logger.LogInformation($"Novo usuario registrado com o email {user.Email}.");
+            _logger.LogInformation($"Novo usuário registrado com o email {user.Email}.");
 
             var userId = await _userManager.GetUserIdAsync(user);
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-            var url = $"https://localhost:5143/Account/ConfirmarEmail?userId={userId}&code{code}";
+            var url = $"http://localhost:5143/Account/ConfirmarEmail?userId={userId}&code={code}";
 
-            await _userManager.AddToRoleAsync(user, "Usuario");
+            await _userManager.AddToRoleAsync(user, "Usuário");
 
-            await _emailSender.SendEmailAsync(registro.Email, "GCook - Criaçao de conta", GetConfirmEmailHtml(HtmlEncoder.Default.Encode(url)));
-
+            await _emailSender.SendEmailAsync(registro.Email, "GCook - Criação de Conta", GetConfirmEmailHtml(HtmlEncoder.Default.Encode(url)));
 
             // Cria a conta pessoal do usuário
             Usuario usuario = new()
@@ -145,8 +144,8 @@ public class UsuarioService : IUsuarioService
             {
                 string fileName = userId + Path.GetExtension(registro.Foto.FileName);
                 string uploads = Path.Combine(_hostEnvironment.WebRootPath, @"img\usuarios");
-                string newfile = Path.Combine(uploads, fileName);
-                using (var stream = new FileStream(newfile, FileMode.Create))
+                string newFile = Path.Combine(uploads, fileName);
+                using (var stream = new FileStream(newFile, FileMode.Create))
                 {
                     registro.Foto.CopyTo(stream);
                 }
@@ -165,6 +164,7 @@ public class UsuarioService : IUsuarioService
         }
         return errors;
     }
+
 
     private string GetConfirmEmailHtml(string url)
     {
@@ -426,4 +426,7 @@ public class UsuarioService : IUsuarioService
         ";
         return email;
     }
+
+
+
 }

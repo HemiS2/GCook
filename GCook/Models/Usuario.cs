@@ -7,21 +7,19 @@ namespace GCook.Models;
 [Table("Usuario")]
 public class Usuario
 {
-        [Key]
-        public string UsuarioId { get; set; }
+    [Key]
+    public string UsuarioId { get; set; }
+    [ForeignKey("UsuarioId")]
 
-        [ForeignKey("UsuarioId")]
-        public IdentityUser ContaUsuario { get; set; }
+    public IdentityUser ContaUsuario  { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string Nome { get; set; }
+    [Required]
+    [StringLength(50)]
+    public string Nome { get; set; }
 
-        [DataType(DataType.Date)]
-        public DateTime DataNascimento { get; set; }
+    [DataType(DataType.Date)]
+    public DateTime DataNascimento { get; set; }
 
-        [StringLength(300)]
-        public string Foto { get; set; }
-
-        
+    [StringLength(300)]
+    public string Foto { get; set; }
 }

@@ -4,28 +4,27 @@
 }
 
 <div class="pt-4 container">
-    <div class="d-flex flex-column text-center text-white ">
-        <h1 class="display-4">GCook</h1
+    <div class="d-flex flex-column text-center text-white">
+        <h1 class="display-4">GCook</h1>
         <hr>
-        <h5>Escolha sua categoria</h5>
+        <h5>Escolha sua Categoria</h5>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-2 mt-2">
-        @foreach (Categoria categoria in Model.Categorias)
-        {
-            <div class="col">
-                <div class="bg-light rounded-2">
-                    <img src="@categoria.Foto" class="w-100 rounded-top-2" alt="@categoria.Nome">
-                    <h3 class="display-4 fs-6 text-dark py-2">
-                        @categoria.Nome
-                    </h3>
+            @foreach (var categoria in Model.Categorias)
+            {
+                <div class="col">
+                    <div class="bg-light rounded-2">
+                        <img src="@categoria.Foto" class="w-100 rounded-top-2" alt="@categoria.Nome">
+                        <h3 class="display-4 fs-6 text-dark py-2" >@categoria.Nome</h3>
+                    </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
-</div>
-
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3 mt-4">
-        @foreach (Receita receita in Model.Receitas)
+
+        @foreach (var receita in Model.Receitas)
+
         {
             <!-- Card Receita - Inicio -->
             <div class="col">
@@ -44,6 +43,10 @@
             </div>
             <!-- Card Receita - Fim -->
         }
+
+        <div id="zeroData" class="col-lg-12 text-center" hidden>
+            <h1 class="my-3 text-danger">Nenhuma Receita Encontrado</h1>
+        </div>
     </div>
 
 </div>

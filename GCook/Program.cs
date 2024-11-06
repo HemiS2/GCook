@@ -11,13 +11,12 @@ var versao = ServerVersion.AutoDetect(conexao);
 builder.Services.AddDbContext<AppDbContext>(
     Options => Options.UseMySql(conexao, versao)
 );
-
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(
     opt => opt.SignIn.RequireConfirmedEmail = true
 )
 .AddEntityFrameworkStores<AppDbContext>()
 .AddDefaultTokenProviders();
-    
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IUsuarioService, UsuarioService>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
@@ -37,7 +36,6 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

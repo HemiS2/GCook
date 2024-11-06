@@ -11,21 +11,16 @@ public class Comentario
 
     [Required]
     public int ReceitaId { get; set; }
-
     [ForeignKey("ReceitaId")]
     public Receita Receita { get; set; }
 
     [Required]
     public string UsuarioId { get; set; }
-
     [ForeignKey("UsuarioId")]
     public Usuario Usuario { get; set; }
 
-    public DateTime DataComentario { get; set; }
+    public DateTime DataComentario { get; set; } = DateTime.Now;
 
     [StringLength(300)]
     public string TextoComentario { get; set; }
-
-    
-    
 }

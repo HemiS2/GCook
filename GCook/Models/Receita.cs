@@ -19,10 +19,10 @@ public class Receita
     [StringLength(30)]
     public string TempoPreparo { get; set; }
 
-    public int Rendimento { get; set; }
+    public int Rendimento { get; set; } = 1;
 
     public Dificuldade Dificuldade { get; set; }
-    
+
     [StringLength(300)]
     public string Foto { get; set; }
 
@@ -30,10 +30,8 @@ public class Receita
     [StringLength(8000)]
     public string Preparo { get; set; }
 
-
     [Required]
     public int CategoriaId { get; set; }
-    
     [ForeignKey("CategoriaId")]
     public Categoria Categoria { get; set; }
 
